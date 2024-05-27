@@ -1,0 +1,9 @@
+Download cds_cleaned_sampled_100k.RDS (mouse reference data for clustering) and save locally to this folder.
+
+Dowload here:
+https://drive.google.com/file/d/11-y6lDP9gl0kLOk7VZt0Ctdag9EdyaoV/view?usp=sharing
+
+or here:
+https://shendure-web.gs.washington.edu/content/members/cao1025/public/mouse_embryo_atlas/
+
+

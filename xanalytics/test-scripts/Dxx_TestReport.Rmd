@@ -1,0 +1,144 @@
+---
+title: "Dxx Dataset Report"
+author: "Derek DeMel"
+date: "4/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**AtlasXomics Inc.**  
+Data generated: 04.26.21  
+Customer: test    
+
+### Sample Information  
+Sample ID: Dxx  
+Species: mus musculus  
+Age: E13  
+Type: FF (Fresh frozen)  
+Number of reads present: 9191402  
+Number of tixels present: 2202  
+Average number of UMI/spot: 3815  
+Average number of genes/spot: 1986  
+
+
+```{r load_libraries, echo=FALSE, results=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(plyr)
+library(magrittr)
+library(tidyr)
+library(OpenImageR)
+library(ggpubr)
+library(grid)
+library(dplyr)
+```
+
+### 
+
+```{r load_data, echo=FALSE, results=FALSE, warning=FALSE}
+UMI.QC <- readImage("D13_AWS_UMI_HM.png")
+gene.QC <- readImage("D13_AWS_genes_HM.png")
+ROI <- readImage("test_ROI.png")
+UMI.hist <- readImage("UMI_hist.png")
+gene.hist <- readImage("gene_hist.png")
+UMI.heatmap <- readImage("UMI_HM.png")
+gene.heatmap <- readImage("gene_HM.png")
+UMI.heatmap.BW <- readImage("UMI_HM_BW.png")
+gene.heatmap.BW <- readImage("gene_HM_BW.png")
+UMAP.clustering <- readImage("UMAP_Clustering.png")
+spatial.clustering <- readImage("Spatial_Clustering1.png")
+spatial.clustering.ROI <- readImage("Spatial_Clustering2.png")
+spatial.clustering.BW <- readImage("Spatial_Clustering3.png")
+deg.HM <- readImage("Top20_DEG_HM.png")
+
+```
+
+### Quality Control heatmaps
+Heatmap of expression on the transcript level.  
+
+```{r aws_umi, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(UMI.QC)
+```
+
+Heatmap of expression on the gene level.  
+
+```{r aws_gene, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(gene.QC)
+```
+
+### Tissue sample
+Some sort of description about the tissue sample
+
+```{r roi_image, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(ROI)
+```
+
+
+### Quality control measures
+
+**UMI and gene count histograms**
+
+```{r umi_hist, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(UMI.hist)
+```
+
+```{r gene_hist, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(gene.hist)
+```
+
+**UMI and gene count spatial plots**  
+The below figures show the total number of unique molecular identifiers and genes detected in each cell, respectively.  
+Artifacts are present in 5 out of 50 columns and 1 out of 50 rows. 298 tixels located off-tissue were filtered out with noise-reduction.
+
+
+```{r umi_HM_BW, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(UMI.heatmap.BW)
+```
+
+```{r gene_HM_BW, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(gene.heatmap.BW)
+```
+
+
+### Cell clustering
+
+**UMAP Clustering**
+
+```{r umap_cluster, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(UMAP.clustering)
+```
+
+**Spatial clustering**  
+Our data analysis pipeline utilizes an unsupervised learning procedure (Louvain algorithm) to empirically define groups of cells with similar expression profiles. 11 unique clusters were identified in this dataset.
+
+```{r spatial_cluster, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(spatial.clustering)
+```
+
+```{r spatial_cluster_BW, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(spatial.clustering.BW)
+```
+
+**Marker gene detection**
+For each of the 11 clusters, the top 20 differentially expressed genes (DEGs) whose expression level is dependent on spatial location were identified.
+
+```{r top20deg, echo=FALSE, results=FALSE, warning=FALSE}
+imageShow(deg.HM)
+```
+
+**GO enrichment analysis**
+Using the identified DEGs for each cluster, a Gene Ontology (GO) analysis was performed to identify key related biological processes.  
+Click on a cluster below to view this information.
+
+
+
+
+
+
+
+
+
+
+
